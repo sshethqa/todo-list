@@ -2,24 +2,38 @@
 
 Super simple todo app built in Python.
 
-The instructions in this README file assume you are running the application on an Ubuntu or Debian machine.
+The instructions in this README file are designed to be followed to run tests on this app using Jenkins on a Windows machine.
 
 ## Prerequisites
 
-First, install pip:
+First, install Python:
 
-```bash
-sudo apt update
-sudo apt install python3 python3-pip -y
+https://www.python.org/downloads/
+
+Follow the default settings for Python, but make sure that the option to 'Add to PATH' is checked.
+
+Next, add the location of the Python executable to your System PATH variable:
+- Enter Windows Key + R and enter `AdvancedSystemProperties`
+- Click on the `Environment Variables` button
+- Under 'System variables', double-click on Path
+- Add the following path to this value: `C:\Users\<your-username>\AppData\Local\Programs\Python\Python39` where `<your-username>` is your username
+
+## Testing the App
+
+Create a virtual environment and activate it:
+
+```
+python -m venv venv
+source venv/Scripts/activate
 ```
 
-Install the pip requirements (make sure you're in the repo root directory):
+Install the pip requirements and pytest/pytest-cov (make sure you're in the repo root directory):
 
 ```bash
-pip3 install -r requirements.txt
+python -m pip3 install -r requirements.txt pytest pytest-cov
 ```
 
-You need to set the database URI that the app needs to connect to and a secret key. This is done via *environment variables*.
+You need to set the database URI that the app needs to connect to and a secret key. This is done using *environment variables*.
 
 ```bash
 export DATABASE_URI=[YOUR_DB_URI]
@@ -34,18 +48,26 @@ The Database URI can be set to an in-memory database using SQLite:
 export DATABASE_URI=sqlite:///data.db
 ```
 
-You will also need to run the `create.py` python script to generate the database schema.
+To run the tests, run:
 
-```bash
-python3 create.py
 ```
+python -m pytest --doctest-modules --junitxml=junit/test-results.xml --cov=application --cov-report=xml --cov-report=html
+```
+
+This will generate a JUnit-style test report for the unit tests in the location `junit/test-results.xml`, as well as a coverage report labelled `coverage.xml` on the root of the directory.
 
 ## Running the App
 
-Simply enter the following in your bash terminal:
+Before you run the app for the first time, you must run the `create.py` python script to create the database schema.
 
 ```bash
-python3 app.py
+python create.py
+```
+
+Then to run the app, simply enter the following in your bash terminal:
+
+```bash
+python app.py
 ```
 
 The website will be accessible on port 5000 on your machine's IP.
@@ -53,49 +75,3 @@ The website will be accessible on port 5000 on your machine's IP.
 Make sure the machine's firewall rules allow network traffic on port 5000.
 
 To stop the application, enter `ctrl+C`.
-
-## Testing the Application
-
-Make sure the current working directory is this repository.
-
-Install `pytest`:
-
-```bash
-sudo apt update 
-sudo apt install python3 python3-pip -y
-pip3 install pytest pytest-cov
-```
-
-Run `pytest` and generate test and coverage reports:
-
-```bash
-python3 -m pytest --doctest-modules --junitxml=junit/test-results.xml --cov=application --cov-report=xml --cov-report=html
-```
-
-This will generate reports that are readable by JUnit and Cobertura.
-
-For your Jenkins jobs:
-
-```bash
-#!/bin/bash
-sudo apt update 
-sudo apt install python3 python3-pip -y
-export DATABASE_URI=sqlite:///data.db
-export SECRET_KEY=osiadniowdj
-pip3 install pytest pytest-cov flask_testing
-pip3 install -r requirements.txt
-python3 -m pytest --doctest-modules --junitxml=junit/test-results.xml --cov=application --cov-report=xml --cov-report=html
-```
-
-## Running as a Systemd Service (Background Service)
-
-The `deploy.sh` script contains the commands required to run the application as a `systemd` service which will run in the background. It will generate a `systemd` service script with the required environment variables.
-
-You will still need to set your `DATABASE_URI` and `SECRET_KEY` environment variables as described above before running the script
-
-The command to run the script is:
-```bash
-bash deploy.sh
-```
-
-bababooie bababooie
