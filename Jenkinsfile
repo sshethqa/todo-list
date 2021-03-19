@@ -3,15 +3,13 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh "bash install.sh" 
-                sh "pip install -r requirements.txt"
-                sh "pip install pytest pytest-cov"
+                sh "bash install.sh"
             }
         }
         stage('Test') {
             steps {
                 //
-                sh "echo test here!"
+                sh "bash python3 -m pytest --cov=application --junitxml=junit.xml --cov-report=xml"
             }
         }
         stage('Deploy') {
