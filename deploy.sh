@@ -5,7 +5,7 @@ sudo apt-get update
 sudo apt-get install python3 python3-pip python3-venv -y
 
 # Create todo list working directory and make working directory
-sudo chown -R jenkins:jenkins /opt
+sudo chown -R jenkins /opt
 install_dir=/opt/todo-list
 rm -rf $install_dir
 mkdir $install_dir
