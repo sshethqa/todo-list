@@ -10,6 +10,14 @@ install_dir=/opt/todo-list
 rm -rf $install_dir
 mkdir $install_dir
 cp -r . $install_dir
+cd $install_dir
+
+# Create and source virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install pip requirements
+pip3 install -r requirements.txt
 
 # Create service script
 cat << EOF > /opt/todo-list/todo-list.service
@@ -29,13 +37,6 @@ EOF
 
 # Install the app service script
 sudo cp /opt/todo-list/todo-list.service /etc/systemd/system/
-
-# Create and source virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Install pip requirements
-pip3 install -r requirements.txt
 
 # Start the systemd service
 sudo systemctl daemon-reload
