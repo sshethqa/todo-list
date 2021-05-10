@@ -29,7 +29,7 @@
             {% if todo.complete == True %}
                 &#9989
                 <form action='{{ url_for('incomplete', id=todo.id) }}'>
-                <input type=submit value="InComplete">
+                <input type=submit value="Incomplete">
                 </form>
             {% else %}
                 <form action='{{ url_for('complete', id=todo.id) }}'>
