@@ -5,4 +5,4 @@ venv
 *pytest*
 htmlcov
 junit
-**/data.db
+**/*.db
