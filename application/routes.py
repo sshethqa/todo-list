@@ -55,7 +55,7 @@ def update(id):
     if form.validate_on_submit():
         todo.task = form.task.data
         db.session.commit()
-        redirect(url_for('index'))
+        return redirect(url_for('index'))
     elif request.method == 'GET':
         form.task.data = todo.task
     return render_template('update.html', title='Update your todo', form=form)
