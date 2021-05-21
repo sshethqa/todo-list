@@ -29,6 +29,7 @@ pipeline {
         }
         stage('Run') {
             steps {
+                sh 'docker rm -f todo-app'
                 sh 'docker run -d -p 80:5000 -e DATABASE_URI=$DATABASE_URI -e SECRET_KEY=$SECRET_KEY --name todo-app htrvolker/todo-app:latest'
                 script{
                     if (env.rebuild_db == 'true'){
