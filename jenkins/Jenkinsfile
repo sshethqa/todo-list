@@ -3,11 +3,17 @@ pipeline {
     environment {
         DATABASE_URI = credentials("DATABASE_URI")
         SECRET_KEY = credentials("SECRET_KEY")
+        DOCKER_LOGIN = credentials("DOCKER_LOGIN")
     }
     stages {
         stage('Test') {
             steps {
                 sh 'bash jenkins/test.sh'
+            }
+        }
+        stage('Setup Docker') {
+            steps {
+                sh 'bash jenkins/setup-docker.sh'
             }
         }
         stage('Build') {
