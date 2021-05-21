@@ -4,6 +4,7 @@ pipeline {
         DATABASE_URI = credentials("DATABASE_URI")
         SECRET_KEY = credentials("SECRET_KEY")
         DOCKER_LOGIN = credentials("DOCKER_LOGIN")
+        rebuild_db = 'true'
     }
     stages {
         stage('Test') {
@@ -29,6 +30,11 @@ pipeline {
         stage('Run') {
             steps {
                 sh 'docker run -d -p 80:5000 -e DATABASE_URI=$DATABASE_URI -e SECRET_KEY=$SECRET_KEY --name todo-app htrvolker/todo-app:latest'
+                script{
+                    if (env.rebuild_db == 'true'){
+                        sh 'docker exec todo-app python create.py'
+                    }
+                }
             }
         }
     }
