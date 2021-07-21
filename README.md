@@ -13,7 +13,14 @@ sudo apt update
 sudo apt install python3 python3-pip -y
 ```
 
-Install the pip requirements (make sure you're in the repo root directory):
+Clone down the repo and `cd` into it:
+
+```bash
+git clone https://github.com/htr-volker/todo-list
+cd todo-list
+```
+
+Install the pip requirements:
 
 ```bash
 pip3 install -r requirements.txt
@@ -28,13 +35,15 @@ export SECRET_KEY=[YOUR_SECRET_KEY]
 
 The secret key can be any value.
 
-The Database URI can be set to an in-memory database using SQLite:
+If you don't have a separate database you can use, you can set the Database URI to an in-memory database using SQLite:
 
 ```bash
 export DATABASE_URI=sqlite:///data.db
 ```
 
-You will also need to run the `create.py` python script to generate the database schema.
+This will just store your database data in a file called `data.db`.
+
+You will then need to run the `create.py` python script to generate the database schema.
 
 ```bash
 python3 create.py
