@@ -29,7 +29,7 @@ cat << EOF > /opt/todo-list/todo-list.service
     WorkingDirectory=/opt/todo-list
     Environment="DATABASE_URI=$DATABASE_URI"
     Environment="SECRET_KEY=$SECRET_KEY"
-    ExecStart=/bin/bash ${install_dir}/run.sh
+    ExecStart=/bin/bash ${install_dir}/jenkins/run.sh
 
     [Install]
     WantedBy=multi-user.target
