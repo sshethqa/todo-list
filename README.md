@@ -6,18 +6,18 @@ The instructions in this README file assume you are running the application on a
 
 ## Prerequisites
 
-First, install pip:
-
-```bash
-sudo apt update
-sudo apt install python3 python3-pip -y
-```
-
 Clone down the repo and `cd` into it:
 
 ```bash
 git clone https://github.com/htr-volker/todo-list
 cd todo-list
+```
+
+Install Python3, pip and venv:
+
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv -y
 ```
 
 Install the pip requirements:
@@ -33,12 +33,11 @@ export DATABASE_URI=[YOUR_DB_URI]
 export SECRET_KEY=[YOUR_SECRET_KEY]
 ```
 
-The secret key can be any value.
-
-If you don't have a separate database you can use, you can set the Database URI to an in-memory database using SQLite:
+The secret key can be any value. If you don't have a separate database you can use, you can set the Database URI to an in-memory database using SQLite. You can use these variables to get the app started:
 
 ```bash
 export DATABASE_URI=sqlite:///data.db
+export SECRET_KEY="ssshh it's a secret!"
 ```
 
 This will just store your database data in a file called `data.db`.
@@ -90,15 +89,15 @@ For your Jenkins jobs:
 sudo apt update 
 sudo apt install python3 python3-pip -y
 export DATABASE_URI=sqlite:///data.db
-export SECRET_KEY=osiadniowdj
+export SECRET_KEY="ssshh it's a secret!"
 pip3 install pytest pytest-cov flask_testing
 pip3 install -r requirements.txt
-python3 -m pytest --doctest-modules --junitxml=junit/test-results.xml --cov=application --cov-report=xml --cov-report=html
+python3 -m pytest --cov=application --junitxml=junit/test-results.xml --cov-report=xml --cov-report=html
 ```
 
 ## Running as a Systemd Service (Background Service)
 
-The `deploy.sh` script contains the commands required to run the application as a `systemd` service which will run in the background. It will generate a `systemd` service script with the required environment variables.
+The `deploy.sh` script contains the commands required to run the application as a `systemd` service (a daemon) which will run in the background. It will generate a `systemd` service script with the required environment variables.
 
 You will still need to set your `DATABASE_URI` and `SECRET_KEY` environment variables as described above before running the script
 
@@ -106,5 +105,3 @@ The command to run the script is:
 ```bash
 bash deploy.sh
 ```
-
-bababooie bababooie
