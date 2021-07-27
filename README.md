@@ -103,5 +103,5 @@ You will still need to set your `DATABASE_URI` and `SECRET_KEY` environment vari
 
 The command to run the script is:
 ```bash
-bash deploy.sh
+bash jenkins/deploy.sh
 ```
