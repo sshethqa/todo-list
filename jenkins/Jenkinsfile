@@ -3,7 +3,7 @@ pipeline {
     environment {
         DATABASE_URI = credentials("DATABASE_URI")
         SECRET_KEY = credentials("SECRET_KEY")
-        DOCKER_LOGIN = credentials("DOCKER_LOGIN")
+//         DOCKER_LOGIN = credentials("DOCKER_LOGIN")
         rebuild_db = 'true'
     }
     stages {
