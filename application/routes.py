@@ -18,7 +18,7 @@ def index():
         todos = Todos.query.order_by(Todos.complete).all()
     else:
         todos = Todos.query.all()
-    return render_template('index.html', title="Todo List App", todos=todos, form=form, totals=totals)
+    return render_template('index.html', title="Don't Worry, Be Happy", todos=todos, form=form, totals=totals)
 
 @app.route('/add', methods=['POST', 'GET'])
 def add():
