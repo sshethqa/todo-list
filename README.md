@@ -4,6 +4,24 @@ Super simple todo app built in Python.
 
 The instructions in this README file assume you are running the application on an Ubuntu or Debian machine.
 
+## Task
+
+Please fork the repository to create a copy of the code under your own account.
+
+Your task is as follows:
+
+* Follow through with this video to learn how to the Todo List app works and how to get it running with Jenkins
+	
+* Use credentials to set the environment variables (the export commands)
+	
+* Get the Jenkins job to run the tests, as described in the README
+	
+* Read through the README and figure out how you could get the app to run as a background process
+	
+* NEW: use the Jenkins plugins JUnit and Cobertura to publish the test reports (video here)
+	
+* NEW: set up a webhook between your forked GitHub repo and Jenkins so that new pushes will trigger the job to start
+
 ## Prerequisites
 
 Clone down the repo and `cd` into it:
