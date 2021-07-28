@@ -7,9 +7,13 @@ sudo apt-get install python3 python3-pip python3-venv -y
 # Create todo list working directory and make working directory
 sudo chown -R jenkins /opt
 install_dir=/opt/todo-list
+echo "Removing Install Dir"
 rm -rf $install_dir
+echo "Creating Install Dir"
 mkdir $install_dir
+echo "Copying to Install Dir"
 cp -r . $install_dir
+echo "Changing directory to Install Dir"
 cd $install_dir
 
 # Create and source virtual environment
