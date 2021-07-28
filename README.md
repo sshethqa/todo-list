@@ -74,7 +74,7 @@ Simply enter the following in your bash terminal:
 python3 app.py
 ```
 
-The website will be accessible on port 5000 on your machine's IP.
+The    website will be accessible on port 5000 on your machine's IP.
 
 Make sure the machine's firewall rules allow network traffic on port 5000.
 
